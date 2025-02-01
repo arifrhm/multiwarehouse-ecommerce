@@ -4,28 +4,43 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>multiwarehouse.ecommerce</groupId> <!-- Updated to match project structure -->
+        <groupId>com.ecommerce.app</groupId>
         <artifactId>order-service</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>order-domain</artifactId>
-    <packaging>pom</packaging> <!-- Retained as pom since it is a parent for modules -->
+    <packaging>pom</packaging>
     <modules>
         <module>order-domain-core</module>
         <module>order-application-service</module>
     </modules>
 
     <properties>
-        <lombok.version>1.18.34</lombok.version> <!-- Use property for version management -->
+        <lombok.version>1.18.34</lombok.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version> <!-- Use the property for consistency -->
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.ecommerce.app</groupId>
+                <artifactId>order-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ecommerce.app</groupId>
+                <artifactId>order-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

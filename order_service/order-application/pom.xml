@@ -4,28 +4,28 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>multiwarehouse.ecommerce</groupId> <!-- Update the groupId -->
-        <artifactId>order-service</artifactId> <!-- Ensure the artifactId matches the correct parent -->
-        <version>1.0-SNAPSHOT</version> <!-- Update the version according to the parent -->
+        <groupId>com.ecommerce.app</groupId>
+        <artifactId>order-service</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>order-application</artifactId>
-    <packaging>jar</packaging> <!-- Change packaging to jar as this is an application module -->
+    <packaging>jar</packaging>
 
     <properties>
-        <lombok.version>1.18.34</lombok.version> <!-- Property for version management -->
+        <lombok.version>1.18.34</lombok.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>multiwarehouse.infra</groupId> <!-- Update groupId to match the new structure -->
+            <groupId>com.ecommerce.app</groupId>
             <artifactId>order-application-service</artifactId>
-            <version>${project.version}</version> <!-- Ensure it inherits the version from parent -->
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>multiwarehouse.infra</groupId> <!-- Update groupId to match the new structure -->
+            <groupId>com.ecommerce.common</groupId>
             <artifactId>common-application</artifactId>
-            <version>${project.version}</version> <!-- Ensure it inherits the version from parent -->
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version> <!-- Use property for version -->
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

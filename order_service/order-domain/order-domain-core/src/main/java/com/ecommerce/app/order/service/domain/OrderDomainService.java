@@ -5,19 +5,18 @@ import multiwarehouse.ecommerce.order.service.domain.entity.Seller;
 import multiwarehouse.ecommerce.order.service.domain.event.OrderCancelledEvent;
 import multiwarehouse.ecommerce.order.service.domain.event.OrderCreatedEvent;
 import multiwarehouse.ecommerce.order.service.domain.event.OrderPaidEvent;
-import multiwarehouse.ecommerce.domain.event.publisher.DomainEventPublisher;
 
 import java.util.List;
 
 public interface OrderDomainService {
-    OrderCreatedEvent validateAndInitiateOrder(Order order, Seller seller,
-                                               DomainEventPublisher<OrderCreatedEvent> orderCreatedEventDomainEventPublisher);
 
-    OrderPaidEvent payOrder(Order order, DomainEventPublisher<OrderPaidEvent> orderPaidEventDomainEventPublisher);
-
+    OrderCreatedEvent validateAndInitiateOrder(Order order, Seller seller);
+    
+    OrderPaidEvent payOrder(Order order);
+    
     void approveOrder(Order order);
-
-    OrderCancelledEvent cancelOrderPayment(Order order, List<String> failureMessages, DomainEventPublisher<OrderCancelledEvent> orderCancelledEventDomainEventPublisher);
-
+    
+    OrderCancelledEvent cancelOrderPayment(Order order, List<String> failureMessages);
+    
     void cancelOrder(Order order, List<String> failureMessages);
 }

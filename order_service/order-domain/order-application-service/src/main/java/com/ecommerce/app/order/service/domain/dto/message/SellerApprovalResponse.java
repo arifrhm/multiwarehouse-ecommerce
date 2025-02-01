@@ -1,22 +1,20 @@
-package multiwarehouse.ecommerce.order.service.domain.dto.message;
+package com.ecommerce.app.order.service.domain.dto.message;
 
-import multiwarehouse.ecommerce.domain.valueobject.OrderApprovalStatus;
+import com.ecommerce.common.domain.valueobject.OrderApprovalStatus;
+import com.ecommerce.common.domain.valueobject.OrderId;
+import com.ecommerce.common.domain.valueobject.SellerId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.Instant;
 import java.util.List;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class SellerApprovalResponse {
-    private final String id;
-    private final String sagaId;
-    private final String orderId;
-    private final String sellerId;
-    private final Instant createdAt;
-    private final OrderApprovalStatus orderApprovalStatus;
-    private final List<String> failureMessage;
+    private OrderId orderId;
+    private SellerId sellerId;
+    private OrderApprovalStatus orderApprovalStatus;
+    private List<String> failureMessages;
 }

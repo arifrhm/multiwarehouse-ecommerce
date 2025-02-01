@@ -1,9 +1,11 @@
-package multiwarehouse.ecommerce.order.service.domain.ports.output.repository;
+package com.ecommerce.app.order.service.domain.ports.output.repository;
 
-import multiwarehouse.ecommerce.order.service.domain.entity.Seller;
+import com.ecommerce.app.order.service.domain.entity.Seller;
+import com.ecommerce.common.domain.valueobject.SellerId;
 
 import java.util.Optional;
 
 public interface SellerRepository {
-    Optional<Seller> findSellerInformation(Seller seller);
+
+    Optional<Seller> findById(SellerId sellerId);
 }

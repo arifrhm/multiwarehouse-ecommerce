@@ -1,57 +1,21 @@
 package multiwarehouse.ecommerce.order.service.domain.entity;
 
-import multiwarehouse.ecommerce.domain.entity.AggregateRoot;
-import multiwarehouse.ecommerce.domain.valueobject.SellerId;
+import lombok.Getter;
+import multiwarehouse.common.domain.entity.AggregateRoot;
+import multiwarehouse.common.domain.valueobject.SellerId;
 
 import java.util.List;
 
+@Getter
 public class Seller extends AggregateRoot<SellerId> {
+    private final String name;
     private final List<Product> products;
-    private boolean active;
+    private final boolean active;
 
-    private Seller(Builder builder) {
-        super.setId(builder.sellerId);
-        products = builder.products;
-        active = builder.active;
-    }
-
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public static final class Builder {
-        private SellerId sellerId;
-        private List<Product> products;
-        private boolean active;
-
-        private Builder() {
-        }
-
-        public Builder sellerId(SellerId val) {
-            sellerId = val;
-            return this;
-        }
-
-        public Builder products(List<Product> val) {
-            products = val;
-            return this;
-        }
-
-        public Builder active(boolean val) {
-            active = val;
-            return this;
-        }
-
-        public Seller build() {
-            return new Seller(this);
-        }
+    public Seller(SellerId sellerId, String name, List<Product> products, boolean active) {
+        super.setId(sellerId);
+        this.name = name;
+        this.products = products;
+        this.active = active;
     }
 }

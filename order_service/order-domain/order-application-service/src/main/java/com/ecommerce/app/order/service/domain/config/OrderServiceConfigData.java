@@ -1,4 +1,4 @@
-package multiwarehouse.ecommerce.order.service.domain.config;
+package com.ecommerce.app.order.service.domain.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

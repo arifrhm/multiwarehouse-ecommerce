@@ -1,13 +1,13 @@
-package multiwarehouse.ecommerce.order.service.domain;
+package com.ecommerce.app.order.service.domain;
 
-import multiwarehouse.ecommerce.order.service.domain.dto.message.SellerApprovalResponse;
-import multiwarehouse.ecommerce.order.service.domain.event.OrderCancelledEvent;
-import multiwarehouse.ecommerce.order.service.domain.ports.input.message.listener.sellerapproval.SellerApprovalResponseMessageListener;
+import com.ecommerce.app.order.service.domain.dto.message.SellerApprovalResponse;
+import com.ecommerce.app.order.service.domain.event.OrderCancelledEvent;
+import com.ecommerce.app.order.service.domain.ports.input.message.listener.sellerapproval.SellerApprovalResponseMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import static multiwarehouse.ecommerce.order.service.domain.entity.Order.FAILURE_MESSAGE_DELIMITER;
+import static com.ecommerce.app.order.service.domain.entity.Order.FAILURE_MESSAGE_DELIMITER;
 
 @Slf4j
 @Validated
@@ -31,7 +31,7 @@ public class SellerApprovalResponseMessageListenerImpl implements SellerApproval
         OrderCancelledEvent domainEvent = orderApprovalSaga.rollback(sellerApprovalResponse);
         log.info("Publishing order cancelled event for order id: {} with failure messages: {}",
                 sellerApprovalResponse.getOrderId(),
-                String.join(FAILURE_MESSAGE_DELIMITER, sellerApprovalResponse.getFailureMessage()));
+                String.join(FAILURE_MESSAGE_DELIMITER, sellerApprovalResponse.getFailureMessages()));
         domainEvent.fire();
     }
 }

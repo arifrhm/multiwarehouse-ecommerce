@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>multiwarehouse.ecommerce</groupId>
+    <groupId>com.ecommerce.app</groupId>
     <artifactId>multiwarehouse-ecommerce</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -18,64 +18,34 @@
         <module>common</module>
         <module>infra</module>
     </modules>
-    <name>Multiwarehose Ecommerce</name>
+    <name>Multiwarehouse Ecommerce</name>
     <description>Spring Boot project</description>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>common</artifactId>
+                <groupId>com.ecommerce.common</groupId>
+                <artifactId>common-domain</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>order_application</artifactId>
+                <groupId>com.ecommerce.app</groupId>
+                <artifactId>order-application</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>order_dataaccess</artifactId>
+                <groupId>com.ecommerce.app</groupId>
+                <artifactId>order-dataaccess</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>order_messaging</artifactId>
+                <groupId>com.ecommerce.app</groupId>
+                <artifactId>order-messaging</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>order_application_service</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>order_domain_core</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>payment_application</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>payment_dataaccess</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>payment_messaging</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>payment_application_service</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>multiwarehouse</groupId>
-                <artifactId>payment_domain_core</artifactId>
+                <groupId>com.ecommerce.app</groupId>
+                <artifactId>order-application-service</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
@@ -84,12 +54,15 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
-                    <skip>true</skip>
+                    <source>17</source>
+                    <target>17</target>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
 </project>

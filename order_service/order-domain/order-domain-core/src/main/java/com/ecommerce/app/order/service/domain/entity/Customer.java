@@ -1,7 +1,7 @@
 package multiwarehouse.ecommerce.order.service.domain.entity;
 
-import multiwarehouse.ecommerce.domain.entity.AggregateRoot;
-import multiwarehouse.ecommerce.domain.valueobject.CustomerId;
+import multiwarehouse.common.domain.entity.AggregateRoot;
+import multiwarehouse.common.domain.valueobject.CustomerId;
 
 public class Customer extends AggregateRoot<CustomerId> {
     public Customer() {

@@ -1,8 +1,7 @@
-package multiwarehouse.ecommerce.order.service.domain.ports.output.repository;
+package com.ecommerce.app.order.service.domain.ports.output.repository;
 
-import multiwarehouse.ecommerce.domain.valueobject.OrderId;
-import multiwarehouse.ecommerce.order.service.domain.entity.Order;
-import multiwarehouse.ecommerce.order.service.domain.valueobject.TrackingId;
+import com.ecommerce.common.domain.valueobject.OrderId;
+import com.ecommerce.app.order.service.domain.entity.Order;
 
 import java.util.Optional;
 
@@ -12,5 +11,5 @@ public interface OrderRepository {
 
     Optional<Order> findById(OrderId orderId);
 
-    Optional<Order> findByTrackingId(TrackingId trackingId);
+    Optional<Order> findByTrackingId(OrderId trackingId);
 }

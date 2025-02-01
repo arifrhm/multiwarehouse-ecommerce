@@ -1,16 +1,26 @@
 package multiwarehouse.ecommerce.order.service.domain.entity;
 
-import multiwarehouse.ecommerce.domain.entity.BaseEntity;
-import multiwarehouse.ecommerce.domain.valueobject.Money;
-import multiwarehouse.ecommerce.domain.valueobject.OrderId;
+import lombok.Getter;
+import multiwarehouse.common.domain.entity.BaseEntity;
+import multiwarehouse.common.domain.valueobject.Money;
+import multiwarehouse.common.domain.valueobject.OrderId;
 import multiwarehouse.ecommerce.order.service.domain.valueobject.OrderItemId;
 
+@Getter
 public class OrderItem extends BaseEntity<OrderItemId> {
     private OrderId orderId;
     private final Product product;
     private final int quantity;
     private final Money price;
     private final Money subTotal;
+
+    private OrderItem(Builder builder) {
+        super.setId(builder.orderItemId);
+        product = builder.product;
+        quantity = builder.quantity;
+        price = builder.price;
+        subTotal = builder.subTotal;
+    }
 
     void initializeOrderItem(OrderId orderId, OrderItemId orderItemId) {
         this.orderId = orderId;
@@ -23,37 +33,8 @@ public class OrderItem extends BaseEntity<OrderItemId> {
                 price.multiply(quantity).equals(subTotal);
     }
 
-    private OrderItem(Builder builder) {
-        super.setId(builder.orderItemId);
-        product = builder.product;
-        quantity = builder.quantity;
-        price = builder.price;
-        subTotal = builder.subTotal;
-    }
-
     public static Builder builder() {
         return new Builder();
-    }
-
-
-    public OrderId getOrderId() {
-        return orderId;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public Money getPrice() {
-        return price;
-    }
-
-    public Money getSubTotal() {
-        return subTotal;
     }
 
     public static final class Builder {

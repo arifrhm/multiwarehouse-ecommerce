@@ -1,18 +1,15 @@
-package multiwarehouse.ecommerce.order.service.domain;
+package com.ecommerce.app.order.service.domain;
 
-import multiwarehouse.ecommerce.order.service.domain.dto.message.PaymentResponse;
-import multiwarehouse.ecommerce.order.service.domain.event.OrderPaidEvent;
-import multiwarehouse.ecommerce.order.service.domain.ports.input.message.listener.payment.PaymentResponseMessageListener;
+import com.ecommerce.app.order.service.domain.dto.message.PaymentResponse;
+import com.ecommerce.app.order.service.domain.event.OrderPaidEvent;
+import com.ecommerce.app.order.service.domain.ports.input.message.listener.payment.PaymentResponseMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import static multiwarehouse.ecommerce.order.service.domain.entity.Order.FAILURE_MESSAGE_DELIMITER;
-
-
+@Slf4j
 @Validated
 @Service
-@Slf4j
 public class PaymentResponseMessageListenerImpl implements PaymentResponseMessageListener {
 
     private final OrderPaymentSaga orderPaymentSaga;
@@ -23,16 +20,15 @@ public class PaymentResponseMessageListenerImpl implements PaymentResponseMessag
 
     @Override
     public void paymentCompleted(PaymentResponse paymentResponse) {
-        OrderPaidEvent domainEvent = orderPaymentSaga.process(paymentResponse);
-        log.info("Publishing OrderPaidEvent for order id: {}", paymentResponse.getOrderId());
-        domainEvent.fire();
+        orderPaymentSaga.process(paymentResponse);
+        log.info("Order Payment Saga process operation completed for order id: {}", paymentResponse.getOrderId().getValue());
     }
 
     @Override
     public void paymentCancelled(PaymentResponse paymentResponse) {
         orderPaymentSaga.rollback(paymentResponse);
-        log.info("Order is roll backed for order id: {} with failure messages: {}",
-                paymentResponse.getOrderId(),
-                String.join(FAILURE_MESSAGE_DELIMITER, paymentResponse.getFailureMessage()));
+        log.info("Order is rolled back for order id: {} with failure messages: {}",
+                paymentResponse.getOrderId().getValue(),
+                String.join(", ", paymentResponse.getMessage()));
     }
 }

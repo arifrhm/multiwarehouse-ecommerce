@@ -1,6 +1,6 @@
-package multiwarehouse.ecommerce.order.service.domain.ports.input.message.listener.payment;
+package com.ecommerce.app.order.service.domain.ports.input.message.listener.payment;
 
-import multiwarehouse.ecommerce.order.service.domain.dto.message.PaymentResponse;
+import com.ecommerce.app.order.service.domain.dto.message.PaymentResponse;
 
 public interface PaymentResponseMessageListener {
 

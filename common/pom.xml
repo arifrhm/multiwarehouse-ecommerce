@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-          <groupId>multiwarehouse.ecommerce</groupId>
-          <artifactId>multiwarehouse-ecommerce</artifactId>
-          <version>0.0.1-SNAPSHOT</version>
+        <groupId>com.ecommerce</groupId>
+        <artifactId>multiwarehouse-ecommerce</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <groupId>multiwarehouse.common</groupId>
+    <groupId>com.ecommerce.common</groupId>
     <artifactId>common</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>

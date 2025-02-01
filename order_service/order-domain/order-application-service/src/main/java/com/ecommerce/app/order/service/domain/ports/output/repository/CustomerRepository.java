@@ -1,10 +1,11 @@
-package multiwarehouse.ecommerce.order.service.domain.ports.output.repository;
+package com.ecommerce.app.order.service.domain.ports.output.repository;
 
-import multiwarehouse.ecommerce.order.service.domain.entity.Customer;
+import com.ecommerce.app.order.service.domain.entity.Customer;
+import com.ecommerce.common.domain.valueobject.CustomerId;
 
 import java.util.Optional;
-import java.util.UUID;
 
 public interface CustomerRepository {
-    Optional<Customer> findCustomer(UUID customerId);
+
+    Optional<Customer> findById(CustomerId customerId);
 }

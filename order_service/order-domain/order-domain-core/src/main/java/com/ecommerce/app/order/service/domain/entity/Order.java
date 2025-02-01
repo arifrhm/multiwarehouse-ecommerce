@@ -1,7 +1,8 @@
 package multiwarehouse.ecommerce.order.service.domain.entity;
 
-import multiwarehouse.ecommerce.domain.entity.AggregateRoot;
-import multiwarehouse.ecommerce.domain.valueobject.*;
+import lombok.Getter;
+import multiwarehouse.common.domain.entity.AggregateRoot;
+import multiwarehouse.common.domain.valueobject.*;
 import multiwarehouse.ecommerce.order.service.domain.exception.OrderDomainException;
 import multiwarehouse.ecommerce.order.service.domain.valueobject.OrderItemId;
 import multiwarehouse.ecommerce.order.service.domain.valueobject.StreetAddress;
@@ -10,6 +11,7 @@ import multiwarehouse.ecommerce.order.service.domain.valueobject.TrackingId;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 public class Order extends AggregateRoot<OrderId> {
     private final CustomerId customerId;
     private final SellerId sellerId;
@@ -20,8 +22,6 @@ public class Order extends AggregateRoot<OrderId> {
     private TrackingId trackingId;
     private OrderStatus orderStatus;
     private List<String> failureMessages;
-
-    public static final String FAILURE_MESSAGE_DELIMITER = ",";
 
     public void initializeOrder() {
         setId(new OrderId(UUID.randomUUID()));
@@ -44,7 +44,7 @@ public class Order extends AggregateRoot<OrderId> {
     }
 
     public void approve() {
-        if(orderStatus != OrderStatus.PAID) {
+        if (orderStatus != OrderStatus.PAID) {
             throw new OrderDomainException("Order is not in correct state for approve operation!");
         }
         orderStatus = OrderStatus.APPROVED;
@@ -107,9 +107,8 @@ public class Order extends AggregateRoot<OrderId> {
     }
 
     private void initializeOrderItems() {
-        long itemId = 1;
-        for (OrderItem orderItem: items) {
-            orderItem.initializeOrderItem(super.getId(), new OrderItemId(itemId++));
+        for (OrderItem orderItem : items) {
+            orderItem.initializeOrderItem(super.getId(), new OrderItemId(UUID.randomUUID()));
         }
     }
 
@@ -127,38 +126,6 @@ public class Order extends AggregateRoot<OrderId> {
 
     public static Builder builder() {
         return new Builder();
-    }
-
-    public CustomerId getCustomerId() {
-        return customerId;
-    }
-
-    public SellerId getSellerId() {
-        return sellerId;
-    }
-
-    public StreetAddress getDeliveryAddress() {
-        return deliveryAddress;
-    }
-
-    public Money getPrice() {
-        return price;
-    }
-
-    public List<OrderItem> getItems() {
-        return items;
-    }
-
-    public TrackingId getTrackingId() {
-        return trackingId;
-    }
-
-    public OrderStatus getOrderStatus() {
-        return orderStatus;
-    }
-
-    public List<String> getFailureMessages() {
-        return failureMessages;
     }
 
     public static final class Builder {

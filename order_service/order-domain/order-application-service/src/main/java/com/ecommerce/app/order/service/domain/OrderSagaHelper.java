@@ -1,14 +1,13 @@
-package multiwarehouse.ecommerce.order.service.domain;
+package com.ecommerce.app.order.service.domain;
 
-import multiwarehouse.ecommerce.domain.valueobject.OrderId;
-import multiwarehouse.ecommerce.order.service.domain.entity.Order;
-import multiwarehouse.ecommerce.order.service.domain.exception.OrderNotFoundException;
-import multiwarehouse.ecommerce.order.service.domain.ports.output.repository.OrderRepository;
+import com.ecommerce.app.order.service.domain.entity.Order;
+import com.ecommerce.app.order.service.domain.exception.OrderNotFoundException;
+import com.ecommerce.app.order.service.domain.ports.output.repository.OrderRepository;
+import com.ecommerce.common.domain.valueobject.OrderId;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Slf4j
 @Component
@@ -20,13 +19,14 @@ public class OrderSagaHelper {
         this.orderRepository = orderRepository;
     }
 
-    Order findOrder(String orderId) {
-        Optional<Order> orderResponse = orderRepository.findById(new OrderId(UUID.fromString(orderId)));
-        if (orderResponse.isEmpty()) {
-            log.error("Order with id: {} could not be found!", orderId);
-            throw new OrderNotFoundException("Order with id " + orderId + " could not be found!");
+    Order findOrder(OrderId orderId) {
+        Optional<Order> orderResult = orderRepository.findById(orderId);
+        if (orderResult.isEmpty()) {
+            log.error("Order with id: {} could not be found!", orderId.getValue());
+            throw new OrderNotFoundException("Order with id: " + orderId.getValue() +
+                    " could not be found!");
         }
-        return orderResponse.get();
+        return orderResult.get();
     }
 
     void saveOrder(Order order) {

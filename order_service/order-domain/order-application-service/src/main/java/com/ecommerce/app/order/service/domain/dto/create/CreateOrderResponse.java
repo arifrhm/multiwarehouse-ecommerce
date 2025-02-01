@@ -1,21 +1,18 @@
-package multiwarehouse.ecommerce.order.service.domain.dto.create;
+package com.ecommerce.app.order.service.domain.dto.create;
 
-import multiwarehouse.ecommerce.domain.valueobject.OrderStatus;
+import com.ecommerce.common.domain.valueobject.OrderId;
+import com.ecommerce.common.domain.valueobject.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
-import java.util.UUID;
+import java.util.List;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class CreateOrderResponse {
-    @NotNull
-    private final UUID orderTrackingId;
-    @NotNull
-    private final OrderStatus orderStatus;
-    @NotNull
-    private final String message;
+    private OrderId orderId;
+    private OrderStatus orderStatus;
+    private List<String> messages;
 }

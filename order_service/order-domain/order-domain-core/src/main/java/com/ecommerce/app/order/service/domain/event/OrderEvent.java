@@ -1,6 +1,6 @@
 package multiwarehouse.ecommerce.order.service.domain.event;
 
-import multiwarehouse.ecommerce.domain.event.DomainEvent;
+import multiwarehouse.common.domain.event.DomainEvent;
 import multiwarehouse.ecommerce.order.service.domain.entity.Order;
 
 import java.time.ZonedDateTime;
@@ -20,5 +20,10 @@ public abstract class OrderEvent implements DomainEvent<Order> {
 
     public ZonedDateTime getCreatedAt() {
         return createdAt;
+    }
+
+    @Override
+    public void fire() {
+        // This method will be implemented by concrete event classes
     }
 }

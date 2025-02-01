@@ -1,4 +1,4 @@
-package multiwarehouse.ecommerce.order.service.domain.dto.track;
+package com.ecommerce.app.order.service.domain.dto.track;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

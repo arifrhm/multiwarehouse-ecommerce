@@ -1,35 +1,21 @@
-package multiwarehouse.ecommerce.order.service.domain.mapper;
+package com.ecommerce.app.order.service.domain.mapper;
 
-import multiwarehouse.ecommerce.domain.valueobject.CustomerId;
-import multiwarehouse.ecommerce.domain.valueobject.Money;
-import multiwarehouse.ecommerce.domain.valueobject.ProductId;
-import multiwarehouse.ecommerce.domain.valueobject.SellerId;
-import multiwarehouse.ecommerce.order.service.domain.dto.create.CreateOrderCommand;
-import multiwarehouse.ecommerce.order.service.domain.dto.create.CreateOrderResponse;
-import multiwarehouse.ecommerce.order.service.domain.dto.create.OrderAddress;
-import multiwarehouse.ecommerce.order.service.domain.dto.track.TrackOrderResponse;
-import multiwarehouse.ecommerce.order.service.domain.entity.Order;
-import multiwarehouse.ecommerce.order.service.domain.entity.OrderItem;
-import multiwarehouse.ecommerce.order.service.domain.entity.Product;
-import multiwarehouse.ecommerce.order.service.domain.entity.Seller;
-import multiwarehouse.ecommerce.order.service.domain.valueobject.*;
+import com.ecommerce.app.order.service.domain.dto.create.CreateOrderCommand;
+import com.ecommerce.app.order.service.domain.dto.create.CreateOrderResponse;
+import com.ecommerce.app.order.service.domain.dto.create.OrderAddress;
+import com.ecommerce.app.order.service.domain.dto.track.TrackOrderResponse;
+import com.ecommerce.common.domain.valueobject.*;
+import com.ecommerce.app.order.service.domain.entity.Order;
+import com.ecommerce.app.order.service.domain.entity.OrderItem;
+import com.ecommerce.app.order.service.domain.entity.Product;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
 public class OrderDataMapper {
-    public Seller createOrderCommandToSeller(CreateOrderCommand createOrderCommand) {
-        return Seller.builder()
-                .sellerId(new SellerId(createOrderCommand.getSellerId()))
-                .products(createOrderCommand.getItems().stream().map(orderItem ->
-                                new Product(new ProductId(orderItem.getProductId())))
-                        .collect(Collectors.toList()))
-                .build();
-    }
 
     public Order createOrderCommandToOrder(CreateOrderCommand createOrderCommand) {
         return Order.builder()
@@ -41,7 +27,6 @@ public class OrderDataMapper {
                 .build();
     }
 
-
     public CreateOrderResponse orderToCreateOrderResponse(Order order, String message) {
         return CreateOrderResponse.builder()
                 .orderTrackingId(order.getTrackingId().getValue())
@@ -50,17 +35,53 @@ public class OrderDataMapper {
                 .build();
     }
 
+    public CreateOrderResponse orderToCreateOrderResponse(Order order) {
+        return CreateOrderResponse.builder()
+                .orderTrackingId(order.getTrackingId().getValue())
+                .orderStatus(order.getOrderStatus())
+                .message("Order created successfully")
+                .build();
+    }
 
     public TrackOrderResponse orderToTrackOrderResponse(Order order) {
         return TrackOrderResponse.builder()
                 .orderTrackingId(order.getTrackingId().getValue())
                 .orderStatus(order.getOrderStatus())
-                .failureMessage(order.getFailureMessages())
+                .failureMessages(order.getFailureMessages())
                 .build();
     }
 
+    public CreateOrderResponse createOrderResponse(OrderId orderId,
+                                                OrderStatus orderStatus,
+                                                List<String> messages) {
+        return CreateOrderResponse.builder()
+                .orderId(orderId)
+                .orderStatus(orderStatus)
+                .messages(messages)
+                .build();
+    }
+
+    public TrackOrderResponse createOrderTrackResponse(OrderId orderId,
+                                                     OrderStatus orderStatus,
+                                                     List<String> messages) {
+        return TrackOrderResponse.builder()
+                .orderId(orderId)
+                .orderStatus(orderStatus)
+                .messages(messages)
+                .build();
+    }
+
+    public Address createOrderAddress(OrderAddress orderAddress) {
+        return new Address(
+                UUID.randomUUID(),
+                orderAddress.getStreet(),
+                orderAddress.getPostalCode(),
+                orderAddress.getCity()
+        );
+    }
+
     private List<OrderItem> orderItemsToOrderItemEntities(
-            @NotNull List<multiwarehouse.ecommerce.order.service.domain.dto.create.OrderItem> orderItems) {
+            List<com.ecommerce.app.order.service.domain.dto.create.OrderItem> orderItems) {
         return orderItems.stream()
                 .map(orderItem ->
                         OrderItem.builder()

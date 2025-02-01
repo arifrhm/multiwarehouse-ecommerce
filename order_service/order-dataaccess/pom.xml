@@ -4,27 +4,29 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>multiwarehouse.ecommerce</groupId> <!-- Updated to match project structure -->
+        <groupId>com.ecommerce.app</groupId>
         <artifactId>order-service</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>order-dataaccess</artifactId>
-    <packaging>jar</packaging> <!-- Changed packaging to jar as this is a code module -->
+    <packaging>jar</packaging>
 
     <properties>
-        <lombok.version>1.18.34</lombok.version> <!-- Use property for version management -->
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version> <!-- Define the Maven compiler plugin version -->
+        <lombok.version>1.18.34</lombok.version>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>multiwarehouse.infra</groupId> <!-- Updated groupId for consistency -->
+            <groupId>com.ecommerce.app</groupId>
             <artifactId>order-application-service</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>multiwarehouse.infra</groupId> <!-- Updated groupId for consistency -->
+            <groupId>com.ecommerce.common</groupId>
             <artifactId>common-dataaccess</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -33,12 +35,12 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.3.1</version> <!-- Specify a version for the PostgreSQL driver -->
+            <version>42.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version> <!-- Use property for consistency -->
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -50,10 +52,17 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <release>17</release>
+                    <source>17</source>
+                    <target>17</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -1,6 +1,6 @@
 package multiwarehouse.ecommerce.order.service.domain.exception;
 
-import multiwarehouse.ecommerce.domain.exception.DomainException;
+import multiwarehouse.common.domain.exception.DomainException;
 
 public class OrderDomainException extends DomainException {
 

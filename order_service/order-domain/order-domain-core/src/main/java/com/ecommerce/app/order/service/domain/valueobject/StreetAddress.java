@@ -1,35 +1,23 @@
 package multiwarehouse.ecommerce.order.service.domain.valueobject;
 
-import java.util.Objects;
-import java.util.UUID;
+import lombok.Builder;
+import lombok.Getter;
 
+@Getter
+@Builder
 public class StreetAddress {
-    private final UUID id;
     private final String street;
-    private final String postalCode;
     private final String city;
+    private final String state;
+    private final String country;
+    private final String postalCode;
 
-    public StreetAddress(UUID id, String street, String postalCode, String city) {
-        this.id = id;
+    public StreetAddress(String street, String city, String state, String country, String postalCode) {
         this.street = street;
-        this.postalCode = postalCode;
         this.city = city;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public String getCity() {
-        return city;
+        this.state = state;
+        this.country = country;
+        this.postalCode = postalCode;
     }
 
     @Override
@@ -37,11 +25,11 @@ public class StreetAddress {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StreetAddress that = (StreetAddress) o;
-        return street.equals(that.street) && postalCode.equals(that.postalCode) && city.equals(that.city);
+        return street.equals(that.street) && city.equals(that.city) && state.equals(that.state) && country.equals(that.country) && postalCode.equals(that.postalCode);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(street, postalCode, city);
+        return java.util.Objects.hash(street, city, state, country, postalCode);
     }
 }

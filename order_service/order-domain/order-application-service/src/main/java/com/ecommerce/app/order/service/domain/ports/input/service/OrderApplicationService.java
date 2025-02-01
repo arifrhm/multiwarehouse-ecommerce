@@ -1,7 +1,7 @@
-package multiwarehouse.ecommerce.order.service.domain.ports.input.service;
+package com.ecommerce.app.order.service.domain.ports.input.service;
 
-import multiwarehouse.ecommerce.order.service.domain.dto.create.CreateOrderCommand;
-import multiwarehouse.ecommerce.order.service.domain.dto.create.CreateOrderResponse;
+import com.ecommerce.app.order.service.domain.dto.create.CreateOrderCommand;
+import com.ecommerce.app.order.service.domain.dto.create.CreateOrderResponse;
 
 import javax.validation.Valid;
 

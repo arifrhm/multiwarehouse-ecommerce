@@ -1,7 +1,7 @@
-package multiwarehouse.ecommerce.order.service.domain.ports.output.message.publisher.payment;
+package com.ecommerce.app.order.service.domain.ports.output.message.publisher.payment;
 
-import multiwarehouse.ecommerce.domain.event.publisher.DomainEventPublisher;
-import multiwarehouse.ecommerce.order.service.domain.event.OrderCreatedEvent;
+import com.ecommerce.common.domain.event.publisher.DomainEventPublisher;
+import com.ecommerce.app.order.service.domain.event.OrderCreatedEvent;
 
 public interface OrderCreatedPaymentRequestMessagePublisher extends DomainEventPublisher<OrderCreatedEvent> {
 

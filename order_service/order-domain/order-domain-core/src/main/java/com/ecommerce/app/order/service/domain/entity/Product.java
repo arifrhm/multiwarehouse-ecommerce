@@ -1,9 +1,12 @@
 package multiwarehouse.ecommerce.order.service.domain.entity;
 
-import multiwarehouse.ecommerce.domain.entity.BaseEntity;
-import multiwarehouse.ecommerce.domain.valueobject.Money;
-import multiwarehouse.ecommerce.domain.valueobject.ProductId;
+import multiwarehouse.common.domain.entity.BaseEntity;
+import multiwarehouse.common.domain.valueobject.Money;
+import multiwarehouse.common.domain.valueobject.ProductId;
 
+import lombok.Getter;
+
+@Getter
 public class Product extends BaseEntity<ProductId> {
     private String name;
     private Money price;
@@ -14,21 +17,8 @@ public class Product extends BaseEntity<ProductId> {
         this.price = price;
     }
 
-    public Product(ProductId productId) {
-
-        super.setId(productId);
-    }
-
     public void updateWithConfirmedNameAndPrice(String name, Money price) {
         this.name = name;
         this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Money getPrice() {
-        return price;
     }
 }

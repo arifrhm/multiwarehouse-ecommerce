@@ -1,33 +1,23 @@
-package multiwarehouse.ecommerce.order.service.domain.dto.message;
+package com.ecommerce.app.order.service.domain.dto.message;
 
-import multiwarehouse.ecommerce.domain.valueobject.PaymentStatus;
+import com.ecommerce.common.domain.valueobject.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Builder
 @AllArgsConstructor
 public class PaymentResponse {
-    private final String id;
-
-    private final String sagaId;
-
-    private final String orderId;
-
-    private final String paymentId;
-
-    private final String customerId;
-
-    private final BigDecimal price;
-
-    private final Instant createdAt;
-
-    private final PaymentStatus paymentStatus;
-
-    private final List<String> failureMessage;
+    private UUID orderId;
+    private UUID paymentId;
+    private String customerId;
+    private BigDecimal price;
+    private Instant createdAt;
+    private PaymentStatus paymentStatus;
+    private List<String> failureMessages;
 }

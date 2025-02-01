@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>multiwarehouse.ecommerce</groupId> <!-- Updated to match project structure -->
+        <groupId>com.ecommerce.app</groupId>
         <artifactId>order-service</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>order-container</artifactId>
@@ -14,28 +14,34 @@
 
     <dependencies>
         <dependency>
-            <groupId>multiwarehouse.infra</groupId> <!-- Updated groupId for consistency -->
+            <groupId>com.ecommerce.app</groupId>
             <artifactId>order-domain-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>multiwarehouse.infra</groupId> <!-- Updated groupId for consistency -->
+            <groupId>com.ecommerce.app</groupId>
             <artifactId>order-application-service</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>multiwarehouse.infra</groupId> <!-- Updated groupId for consistency -->
+            <groupId>com.ecommerce.app</groupId>
             <artifactId>order-application</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>multiwarehouse.infra</groupId> <!-- Updated groupId for consistency -->
+            <groupId>com.ecommerce.app</groupId>
             <artifactId>order-dataaccess</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>multiwarehouse.infra</groupId> <!-- Updated groupId for consistency -->
+            <groupId>com.ecommerce.app</groupId>
             <artifactId>order-messaging</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>multiwarehouse.infra</groupId> <!-- Updated groupId for consistency -->
+            <groupId>com.ecommerce.common</groupId>
             <artifactId>common-dataaccess</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,20 +55,17 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <image>
-                        <name>${project.groupId}/order.service:${project.version}</name>
-                    </image>
+                    <mainClass>com.ecommerce.app.order.service.OrderServiceApplication</mainClass>
+                    <layout>JAR</layout>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>install</phase>
                         <goals>
-                            <goal>build-image</goal>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>
