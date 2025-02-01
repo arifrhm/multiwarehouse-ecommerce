@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>multiwarehouse.ecommerce</groupId> <!-- Updated to match project structure -->
+        <artifactId>order-service</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>order-dataaccess</artifactId>
+    <packaging>jar</packaging> <!-- Changed packaging to jar as this is a code module -->
+
+    <properties>
+        <lombok.version>1.18.34</lombok.version> <!-- Use property for version management -->
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version> <!-- Define the Maven compiler plugin version -->
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>multiwarehouse.infra</groupId> <!-- Updated groupId for consistency -->
+            <artifactId>order-application-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>multiwarehouse.infra</groupId> <!-- Updated groupId for consistency -->
+            <artifactId>common-dataaccess</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.1</version> <!-- Specify a version for the PostgreSQL driver -->
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version> <!-- Use property for consistency -->
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

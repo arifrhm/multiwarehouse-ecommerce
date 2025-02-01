@@ -1,0 +1,3 @@
+networks:
+  multiwarehouse-ecommerce:
+    driver: bridge
