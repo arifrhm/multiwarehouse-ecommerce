@@ -1,0 +1,80 @@
+server:
+  port: 8182
+
+logging:
+  level:
+    com.arifrhm: DEBUG
+
+order-service:
+  order-response-topic-name: order-response
+  user-registered-topic-name: user-registered
+  product-created-topic-name:  product-created
+  warehouse-created-topic-name:  warehouse-created
+  stock-created-topic-name:  stock-created
+  stock-updated-topic-name:  stock-updated
+  payment-response-topic-name: payment-response
+
+xendit:
+  secret: xnd_development_1ozuayL7p7VSpc7rPXrGxbBUzy06zT4pAfMGHYxYWBHuLV4hSvwaaxzvluqXo5x
+spring:
+  jpa:
+    open-in-view: false
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        default_schema: "\"order\""
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/multiwarehouse?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    username: postgres
+    password: 11111111
+    driver-class-name: org.postgresql.Driver
+#    schema: classpath:init-schema.sql
+  sql:
+    init:
+      platform: postgres
+      mode: always
+#      schema-locations: classpath:init-schema.sql
+
+kafka-config:
+  bootstrap-servers: localhost:19092,localhost:29092,localhost:39092
+  schema-registry-url-key: schema.registry.url
+  schema-registry-url: http://localhost:8081
+  num-of-partitions: 3
+  replication-factor: 3
+
+kafka-producer-config:
+  key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
+  value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
+  compression-type: snappy
+  acks: all
+  batch-size: 16384
+  batch-size-boost-factor: 100
+  linger-ms: 5
+  request-timeout-ms: 60000
+  retry-count: 5
+
+kafka-consumer-config:
+  key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+  order-service-product-saved-consumer-group-id: order-service-product-saved-consumer-group
+  order-service-warehouse-stock-created-group-id: order-service-warehouse-stock-created-group
+  order-service-warehouse-stock-updated-group-id: order-service-warehouse-stock-updated-group
+  order-service-user-saved-consumer-group-id: order-service-user-saved-consumer-group
+  order-service-warehouse-saved-consumer-group-id: order-service-warehouse-saved-consumer-group
+  auto-offset-reset: earliest
+  specific-avro-reader-key: specific.avro.reader
+  specific-avro-reader: true
+  batch-listener: true
+  auto-startup: true
+  concurrency-level: 3
+  session-timeout-ms: 10000
+  heartbeat-interval-ms: 3000
+  max-poll-interval-ms: 300000
+  max-poll-records: 500
+  max-partition-fetch-bytes-default: 1048576
+  max-partition-fetch-bytes-boost-factor: 1
+  poll-timeout-ms: 150
