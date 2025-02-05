@@ -3,25 +3,24 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-          <groupId>multiwarehouse.ecommerce</groupId>
-          <artifactId>multiwarehouse-ecommerce</artifactId>
-          <version>0.0.1-SNAPSHOT</version>
+        <groupId>com.arifrhm</groupId>
+        <artifactId>multi-warehouse</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>multiwarehouse.common</groupId>
     <artifactId>common</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>common_domain</module>
-        <module>common_application</module>
+        <module>common-domain</module>
+        <module>common-application</module>
+        <module>common-dataaccess</module>
     </modules>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-    </properties>
+<!--    <properties>-->
+<!--        <maven.compiler.source>16</maven.compiler.source>-->
+<!--        <maven.compiler.target>16</maven.compiler.target>-->
+<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+<!--    </properties>-->
 
 </project>
