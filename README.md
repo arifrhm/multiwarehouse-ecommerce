@@ -6,20 +6,13 @@ This application demonstrates a Java-based multi-warehouse e-commerce system bui
 
 ## High-Level System Architecture
 
-- The application leverages an event-driven architecture using Kafka.
-- Each service is independent and communicates via Kafka topics for scalability and resilience.
-- High-level design includes the following services:
-    - **Product Service**: Manages product catalog.
+- **Architecture**: The application leverages an event-driven architecture using Kafka.
+- **Service Communication**: Each service is independent and communicates via Kafka topics for scalability and resilience.
+- **Core Services**:
+    - **Product Service**: Manages the product catalog.
     - **User Service**: Handles user authentication.
     - **Warehouse Service**: Manages warehouses and their inventory.
-    - **Order Service**: Handles order processing and status updates.
-
-System architecture images:
-
-1. **High-Level System Design**:
-   ![high level system design](./documentation/high_level_system_design.png)
-2. **Low-Level System Design**:
-   ![low level system design](./documentation/low_level_system_design.png)
+    - **Order Service**: Processes orders and updates their status.
 
 ---
 
@@ -38,63 +31,24 @@ Ensure the following dependencies are installed:
 ## Services Overview
 
 ### Product Service
-- Manages product catalog and inventory.
-- Communicates product updates via Kafka.
-
-**Database Design**:
-![Product Service Database Design](./documentation/product_service_db_design.png)
-
-**Domain Design**:
-![Product Service Domain Design](./documentation/product_service_domain_design.png)
-- Manages product catalog and inventory.
-- Communicates product updates via Kafka.
-
-**Swagger Documentation**: [Product Service API Docs](http://localhost:8185/product/swagger-ui.html)
+- **Functionality**: Manages the product catalog and inventory.
+- **Event Handling**: Communicates product updates via Kafka.
+- **Database**: Stores product details and inventory levels.
 
 ### User Service
-- Manages user profiles, authentication, and roles.
-- Issues JWT tokens for secure communication.
-
-**Database Design**:
-![User Service Database Design](./documentation/user_service_db_design.png)
-
-**Domain Design**:
-![User Service Domain Design](./documentation/user_service_domain_design.png)
-- Manages user profiles, authentication, and roles.
-- Issues JWT tokens for secure communication.
-
-**Swagger Documentation**: [User Service API Docs](http://localhost:8183/user/swagger-ui.html)
-
+- **Functionality**: Manages user profiles, authentication, and roles.
+- **Event Handling**: Issues JWT tokens for secure communication.
+- **Database**: Stores user information and authentication data.
 
 ### Warehouse Service
-- Manages warehouse details and inventory synchronization.
-- Consumes product updates and publishes inventory changes.
-
-**Database Design**:
-![Warehouse Service Database Design](./documentation/warehouse_service_db_design.png)
-
-**Domain Design**:
-![Warehouse Service Domain Design](./documentation/warehouse_service_domain_design.png)
-- Manages warehouse details and inventory synchronization.
-- Consumes product updates and publishes inventory changes.
-
-**Swagger Documentation**: [Warehouse Service API Docs](http://localhost:8181/warehouse/swagger-ui.html)
-
+- **Functionality**: Manages warehouse details and inventory synchronization.
+- **Event Handling**: Consumes product updates and publishes inventory changes.
+- **Database**: Stores warehouse information and inventory records.
 
 ### Order Service
-- Processes customer orders.
-- Consumes warehouse inventory updates and manages order statuses.
-
-**Database Design**:
-![Order Service Database Design](./documentation/order_service_db_design.png)
-
-**Domain Design**:
-![Order Service Domain Design](./documentation/order_service_domain_design.png)
-- Processes customer orders.
-- Consumes warehouse inventory updates and manages order statuses.
-
-**Swagger Documentation**: [Order Service API Docs](http://localhost:8182/order/swagger-ui.html)
-
+- **Functionality**: Processes customer orders, updates order status, and integrates with warehouse inventory.
+- **Event Handling**: Consumes inventory updates from Kafka to ensure accurate order fulfillment.
+- **Database**: Stores order details and status history.
 
 ---
 
@@ -115,7 +69,7 @@ Example `application.yml` snippet for database configuration:
 ```yaml
 spring:
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/<db_name>?currentSchema=<db_schema>>&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    url: jdbc:postgresql://127.0.0.1:5432/<db_name>?currentSchema=<db_schema>&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
     username: <db_user>
     password: <db_password>
     driver-class-name: org.postgresql.Driver
@@ -177,7 +131,6 @@ kubectl cp create-topics-local.sh kafka-client:/kafka-client-storage
 kubectl exec -it kafka-client -- /bin/bash
 sh ../../kafka-client-storage/create-topics-local.sh my-confluent-cp-zookeeper-headless
 ```
-
 
 ### 3. Deploy Services
 
@@ -261,4 +214,3 @@ Path to the Postman collection:
    ```
 3. For scaling, configure Kafka partitions and service replicas based on load.
 
----
